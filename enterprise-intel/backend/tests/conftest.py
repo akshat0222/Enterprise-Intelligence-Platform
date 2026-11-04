@@ -10,6 +10,10 @@ os.environ["DATABASE_URL"] = _base.set(database=TEST_DB).render_as_string(hide_p
 os.environ["RATE_LIMIT_ENABLED"] = "false"
 os.environ["UPLOAD_DIR"] = tempfile.mkdtemp(prefix="uploads-")
 os.environ["ENVIRONMENT"] = "test"
+os.environ["EMBEDDING_PROVIDER"] = "hash"
+os.environ["MIN_SIMILARITY"] = "0.2"  # the hashing embedder has a different similarity scale than MiniLM
+os.environ["LANGFUSE_PUBLIC_KEY"] = ""  # tests must never send traces to a real project
+os.environ["LANGFUSE_SECRET_KEY"] = ""
 
 import fitz  # noqa: E402
 import pytest  # noqa: E402

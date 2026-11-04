@@ -129,3 +129,11 @@ def test_injection_flagged_at_ingestion(client, alice):
 def test_error_shape_and_no_stack_traces(client, alice):
     r = client.get("/documents/not-a-uuid", headers=alice)
     assert r.status_code == 422 and set(r.json()["error"]) == {"code", "message"}
+
+
+def test_hosted_database_urls_get_the_psycopg_driver():
+    from app.config import Settings
+
+    assert Settings(database_url="postgresql://u:p@h/db").database_url == "postgresql+psycopg://u:p@h/db"
+    assert Settings(database_url="postgres://u:p@h/db").database_url == "postgresql+psycopg://u:p@h/db"
+    assert Settings(database_url="postgresql+psycopg://u:p@h/db").database_url == "postgresql+psycopg://u:p@h/db"

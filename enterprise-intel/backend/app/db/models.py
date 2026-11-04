@@ -79,7 +79,7 @@ class Chunk(Base):
     word_count: Mapped[int | None] = mapped_column(Integer)
     chunk_metadata: Mapped[dict | None] = mapped_column("metadata", JSONB)
     flagged_injection: Mapped[bool] = mapped_column(Boolean, server_default=text("false"))
-    embedding: Mapped[list[float] | None] = mapped_column(Vector(1536))
+    embedding: Mapped[list[float] | None] = mapped_column(Vector(384))
     embedding_model: Mapped[str | None] = mapped_column(Text)
 
 
@@ -111,6 +111,7 @@ class Message(Base):
     route: Mapped[str | None] = mapped_column(Text)
     status: Mapped[str | None] = mapped_column(Text)
     groundedness_score: Mapped[float | None] = mapped_column(Float)
+    details: Mapped[dict | None] = mapped_column(JSONB)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
