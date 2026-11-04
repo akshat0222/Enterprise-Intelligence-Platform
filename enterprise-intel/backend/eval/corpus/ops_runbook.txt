@@ -1,0 +1,20 @@
+OPERATIONS RUNBOOK
+==================
+
+1. DATABASE FAILOVER
+
+Check the replication lag before promoting the replica. Promote the replica only if lag is under 10 seconds.
+Update the connection string in the secrets manager and restart the API pods.
+
+2. ON-CALL ESCALATION
+
+Page the primary on-call engineer first. If the primary on-call does not acknowledge within 15 minutes, escalate to the
+engineering manager. If the engineering manager does not respond within a further 15 minutes, page the VP of Engineering.
+
+3. BACKUPS
+
+Full database backups run nightly at 02:00 UTC and are retained for 30 days. Restore tests are performed monthly.
+
+4. DISK ALERTS
+
+The disk usage alert threshold is currently 90 percent for data volumes.

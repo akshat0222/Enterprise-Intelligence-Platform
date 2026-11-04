@@ -1,0 +1,10 @@
+SUPPORT SLA 2023
+================
+
+RESPONSE TARGETS
+
+Critical priority tickets receive a first response within 1 hour. High priority tickets receive a first response within 4 hours.
+
+RESOLUTION TARGETS
+
+The resolution target for critical tickets is 8 hours. The resolution target for high priority tickets is 48 hours.

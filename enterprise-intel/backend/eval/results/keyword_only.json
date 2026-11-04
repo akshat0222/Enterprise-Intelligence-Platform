@@ -1,0 +1,458 @@
+{
+ "name": "keyword_only",
+ "config": {
+  "mode": "keyword",
+  "rerank": false,
+  "chunk_tokens": 500,
+  "embedding": "local",
+  "min_similarity": 0.4,
+  "min_keyword_rank": 0.05
+ },
+ "corpus": {
+  "documents": 10,
+  "chunks": 34
+ },
+ "retrieval": {
+  "n_answerable": 24,
+  "hit@1": 0.9166666666666666,
+  "hit@3": 1.0,
+  "hit@8": 1.0,
+  "recall@8": 1.0,
+  "mrr": 0.9583333333333334,
+  "gate_refusal_unanswerable": 1.0,
+  "gate_false_refusal_answerable": 0.4166666666666667,
+  "per_question": [
+   {
+    "id": "sf-1",
+    "category": "single_fact",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "incident_report_2024_q2.pdf",
+     "support_sla_2024.md",
+     "support_tickets.csv"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.050901834
+   },
+   {
+    "id": "sf-2",
+    "category": "single_fact",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.06079271
+   },
+   {
+    "id": "sf-3",
+    "category": "single_fact",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "security_policy.md",
+     "incident_report_2024_q3.pdf",
+     "ops_runbook.txt"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.05066059
+   },
+   {
+    "id": "sf-4",
+    "category": "single_fact",
+    "expected": [
+     "security_policy.md"
+    ],
+    "ranked": [
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.05319362
+   },
+   {
+    "id": "sf-5",
+    "category": "single_fact",
+    "expected": [
+     "ops_runbook.txt"
+    ],
+    "ranked": [
+     "ops_runbook.txt",
+     "incident_report_2024_q2.pdf",
+     "support_tickets.csv",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "security_policy.md"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.040528473
+   },
+   {
+    "id": "sf-6",
+    "category": "single_fact",
+    "expected": [
+     "ops_runbook.txt"
+    ],
+    "ranked": [
+     "ops_runbook.txt",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.06255176
+   },
+   {
+    "id": "sf-7",
+    "category": "single_fact",
+    "expected": [
+     "security_policy.md"
+    ],
+    "ranked": [
+     "security_policy.md",
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "product_spec.md",
+     "incident_report_2024_q1.pdf",
+     "support_tickets.csv"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.057753075
+   },
+   {
+    "id": "sf-8",
+    "category": "single_fact",
+    "expected": [
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.056064386
+   },
+   {
+    "id": "tb-1",
+    "category": "table_numeric",
+    "expected": [
+     "incident_report_2024_q1.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "security_policy.md"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.031747304
+   },
+   {
+    "id": "tb-2",
+    "category": "table_numeric",
+    "expected": [
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "security_policy.md",
+     "ops_runbook.txt"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.040045988
+   },
+   {
+    "id": "tb-3",
+    "category": "table_numeric",
+    "expected": [
+     "support_tickets.csv"
+    ],
+    "ranked": [
+     "support_tickets.csv",
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.05436524
+   },
+   {
+    "id": "tb-4",
+    "category": "table_numeric",
+    "expected": [
+     "support_tickets.csv"
+    ],
+    "ranked": [
+     "support_tickets.csv",
+     "support_sla_2024.md",
+     "support_sla_2023.txt",
+     "product_spec.md"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.04077393
+   },
+   {
+    "id": "ms-1",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.040528473
+   },
+   {
+    "id": "ms-2",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "support_tickets.csv"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.048813593
+   },
+   {
+    "id": "ms-3",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf",
+     "support_tickets.csv"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.056824297
+   },
+   {
+    "id": "ms-4",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.019540515
+   },
+   {
+    "id": "cf-1",
+    "category": "conflict",
+    "expected": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md"
+    ],
+    "ranked": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "support_tickets.csv",
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.05210804
+   },
+   {
+    "id": "cf-2",
+    "category": "conflict",
+    "expected": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md"
+    ],
+    "ranked": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "support_tickets.csv",
+     "product_spec.md"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.07219134
+   },
+   {
+    "id": "cf-3",
+    "category": "conflict",
+    "expected": [
+     "product_spec.md",
+     "support_sla_2024.md"
+    ],
+    "ranked": [
+     "support_sla_2024.md",
+     "product_spec.md"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.030396355
+   },
+   {
+    "id": "un-1",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": null
+   },
+   {
+    "id": "un-2",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": null
+   },
+   {
+    "id": "un-3",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [
+     "support_tickets.csv",
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "product_spec.md",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.012665148
+   },
+   {
+    "id": "un-4",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": null
+   },
+   {
+    "id": "fu-1",
+    "category": "follow_up",
+    "expected": [
+     "incident_report_2024_q2.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "product_spec.md"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.066642806
+   },
+   {
+    "id": "fu-2",
+    "category": "follow_up",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "incident_report_2024_q1.pdf",
+     "security_policy.md"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.0430615
+   },
+   {
+    "id": "fu-3",
+    "category": "follow_up",
+    "expected": [
+     "ops_runbook.txt"
+    ],
+    "ranked": [
+     "ops_runbook.txt",
+     "support_sla_2024.md",
+     "support_sla_2023.txt",
+     "incident_report_2024_q3.pdf",
+     "support_tickets.csv",
+     "security_policy.md",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.07532747
+   },
+   {
+    "id": "pi-1",
+    "category": "injection",
+    "expected": [
+     "vendor_notes.txt"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "vendor_notes.txt",
+     "support_tickets.csv",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": null,
+    "max_kw": 0.065858774
+   },
+   {
+    "id": "pi-2",
+    "category": "injection",
+    "expected": [
+     "vendor_notes.txt"
+    ],
+    "ranked": [
+     "vendor_notes.txt"
+    ],
+    "insufficient": true,
+    "max_sim": null,
+    "max_kw": 0.04939408
+   }
+  ]
+ },
+ "seconds": 3
+}

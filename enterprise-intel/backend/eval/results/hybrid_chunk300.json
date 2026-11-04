@@ -1,0 +1,543 @@
+{
+ "name": "hybrid_chunk300",
+ "config": {
+  "mode": "hybrid",
+  "rerank": false,
+  "chunk_tokens": 300,
+  "embedding": "local",
+  "min_similarity": 0.4,
+  "min_keyword_rank": 0.05
+ },
+ "corpus": {
+  "documents": 10,
+  "chunks": 36
+ },
+ "retrieval": {
+  "n_answerable": 24,
+  "hit@1": 0.9166666666666666,
+  "hit@3": 1.0,
+  "hit@8": 1.0,
+  "recall@8": 1.0,
+  "mrr": 0.951388888888889,
+  "gate_refusal_unanswerable": 0.75,
+  "gate_false_refusal_answerable": 0.0,
+  "per_question": [
+   {
+    "id": "sf-1",
+    "category": "single_fact",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "support_sla_2024.md",
+     "support_tickets.csv",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7942302227020264,
+    "max_kw": 0.050901834
+   },
+   {
+    "id": "sf-2",
+    "category": "single_fact",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "incident_report_2024_q1.pdf",
+     "support_sla_2023.txt",
+     "support_sla_2024.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5854122042655945,
+    "max_kw": 0.06079271
+   },
+   {
+    "id": "sf-3",
+    "category": "single_fact",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "security_policy.md",
+     "ops_runbook.txt",
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7298060655593872,
+    "max_kw": 0.05066059
+   },
+   {
+    "id": "sf-4",
+    "category": "single_fact",
+    "expected": [
+     "security_policy.md"
+    ],
+    "ranked": [
+     "security_policy.md",
+     "product_spec.md",
+     "ops_runbook.txt",
+     "support_sla_2024.md",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.8011777043693578,
+    "max_kw": 0.05319362
+   },
+   {
+    "id": "sf-5",
+    "category": "single_fact",
+    "expected": [
+     "ops_runbook.txt"
+    ],
+    "ranked": [
+     "ops_runbook.txt",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7167365550994873,
+    "max_kw": 0.040528473
+   },
+   {
+    "id": "sf-6",
+    "category": "single_fact",
+    "expected": [
+     "ops_runbook.txt"
+    ],
+    "ranked": [
+     "ops_runbook.txt",
+     "incident_report_2024_q1.pdf",
+     "support_sla_2024.md",
+     "support_sla_2023.txt",
+     "vendor_notes.txt",
+     "security_policy.md",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.6385471820831299,
+    "max_kw": 0.06255176
+   },
+   {
+    "id": "sf-7",
+    "category": "single_fact",
+    "expected": [
+     "security_policy.md"
+    ],
+    "ranked": [
+     "security_policy.md",
+     "incident_report_2024_q1.pdf",
+     "product_spec.md",
+     "incident_report_2024_q2.pdf",
+     "support_sla_2024.md",
+     "support_sla_2023.txt"
+    ],
+    "insufficient": false,
+    "max_sim": 0.841260552406311,
+    "max_kw": 0.057753075
+   },
+   {
+    "id": "sf-8",
+    "category": "single_fact",
+    "expected": [
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5258983969688416,
+    "max_kw": 0.056064386
+   },
+   {
+    "id": "tb-1",
+    "category": "table_numeric",
+    "expected": [
+     "incident_report_2024_q1.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5661267042160034,
+    "max_kw": 0.031747304
+   },
+   {
+    "id": "tb-2",
+    "category": "table_numeric",
+    "expected": [
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5242773138202058,
+    "max_kw": 0.040045988
+   },
+   {
+    "id": "tb-3",
+    "category": "table_numeric",
+    "expected": [
+     "support_tickets.csv"
+    ],
+    "ranked": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "support_tickets.csv",
+     "security_policy.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7331486344337463,
+    "max_kw": 0.052517854
+   },
+   {
+    "id": "tb-4",
+    "category": "table_numeric",
+    "expected": [
+     "support_tickets.csv"
+    ],
+    "ranked": [
+     "support_sla_2023.txt",
+     "support_tickets.csv",
+     "support_sla_2024.md",
+     "product_spec.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7188425660133362,
+    "max_kw": 0.03938839
+   },
+   {
+    "id": "ms-1",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.8327503204345703,
+    "max_kw": 0.040528473
+   },
+   {
+    "id": "ms-2",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5154391527175903,
+    "max_kw": 0.048813593
+   },
+   {
+    "id": "ms-3",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf",
+     "support_tickets.csv"
+    ],
+    "insufficient": false,
+    "max_sim": 0.6652703285217285,
+    "max_kw": 0.056824297
+   },
+   {
+    "id": "ms-4",
+    "category": "multi_doc",
+    "expected": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q2.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5357582569122314,
+    "max_kw": 0.019540515
+   },
+   {
+    "id": "cf-1",
+    "category": "conflict",
+    "expected": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md"
+    ],
+    "ranked": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "support_tickets.csv",
+     "ops_runbook.txt"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7721840143203735,
+    "max_kw": 0.05210804
+   },
+   {
+    "id": "cf-2",
+    "category": "conflict",
+    "expected": [
+     "support_sla_2023.txt",
+     "support_sla_2024.md"
+    ],
+    "ranked": [
+     "support_sla_2024.md",
+     "support_sla_2023.txt",
+     "support_tickets.csv",
+     "product_spec.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.6415209556532487,
+    "max_kw": 0.07219134
+   },
+   {
+    "id": "cf-3",
+    "category": "conflict",
+    "expected": [
+     "product_spec.md",
+     "support_sla_2024.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "support_sla_2024.md",
+     "vendor_notes.txt",
+     "support_sla_2023.txt",
+     "incident_report_2024_q3.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5856300766953851,
+    "max_kw": 0.030396355
+   },
+   {
+    "id": "un-1",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [
+     "ops_runbook.txt",
+     "vendor_notes.txt",
+     "product_spec.md",
+     "incident_report_2024_q1.pdf",
+     "support_sla_2024.md",
+     "incident_report_2024_q3.pdf"
+    ],
+    "insufficient": true,
+    "max_sim": 0.19192638993263245,
+    "max_kw": null
+   },
+   {
+    "id": "un-2",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [
+     "product_spec.md",
+     "support_tickets.csv",
+     "support_sla_2024.md",
+     "vendor_notes.txt"
+    ],
+    "insufficient": true,
+    "max_sim": 0.2063641907681284,
+    "max_kw": null
+   },
+   {
+    "id": "un-3",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [
+     "product_spec.md",
+     "support_tickets.csv",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5740543603897095,
+    "max_kw": 0.010132118
+   },
+   {
+    "id": "un-4",
+    "category": "unanswerable",
+    "expected": [],
+    "ranked": [
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "product_spec.md",
+     "support_sla_2024.md"
+    ],
+    "insufficient": true,
+    "max_sim": 0.2956355810165405,
+    "max_kw": null
+   },
+   {
+    "id": "fu-1",
+    "category": "follow_up",
+    "expected": [
+     "incident_report_2024_q2.pdf"
+    ],
+    "ranked": [
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.5274042205455444,
+    "max_kw": 0.066642806
+   },
+   {
+    "id": "fu-2",
+    "category": "follow_up",
+    "expected": [
+     "product_spec.md"
+    ],
+    "ranked": [
+     "product_spec.md",
+     "security_policy.md",
+     "incident_report_2024_q1.pdf",
+     "ops_runbook.txt",
+     "support_sla_2024.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.8549298302808357,
+    "max_kw": 0.0430615
+   },
+   {
+    "id": "fu-3",
+    "category": "follow_up",
+    "expected": [
+     "ops_runbook.txt"
+    ],
+    "ranked": [
+     "ops_runbook.txt",
+     "support_sla_2023.txt",
+     "support_sla_2024.md",
+     "security_policy.md",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf"
+    ],
+    "insufficient": false,
+    "max_sim": 0.6493936777114868,
+    "max_kw": 0.07532747
+   },
+   {
+    "id": "pi-1",
+    "category": "injection",
+    "expected": [
+     "vendor_notes.txt"
+    ],
+    "ranked": [
+     "vendor_notes.txt",
+     "incident_report_2024_q3.pdf",
+     "incident_report_2024_q2.pdf",
+     "incident_report_2024_q1.pdf",
+     "support_tickets.csv"
+    ],
+    "insufficient": false,
+    "max_sim": 0.6653338074684143,
+    "max_kw": 0.065858774
+   },
+   {
+    "id": "pi-2",
+    "category": "injection",
+    "expected": [
+     "vendor_notes.txt"
+    ],
+    "ranked": [
+     "vendor_notes.txt",
+     "support_sla_2024.md",
+     "incident_report_2024_q2.pdf",
+     "support_tickets.csv",
+     "incident_report_2024_q1.pdf",
+     "incident_report_2024_q3.pdf",
+     "product_spec.md"
+    ],
+    "insufficient": false,
+    "max_sim": 0.7438790202140808,
+    "max_kw": 0.04939408
+   }
+  ]
+ },
+ "gate_sweep": [
+  {
+   "min_similarity": 0.1,
+   "refuse_unanswerable": 0.0,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.0,
+   "false_refusal_sim_only": 0.0
+  },
+  {
+   "min_similarity": 0.15,
+   "refuse_unanswerable": 0.0,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.0,
+   "false_refusal_sim_only": 0.0
+  },
+  {
+   "min_similarity": 0.2,
+   "refuse_unanswerable": 0.25,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.25,
+   "false_refusal_sim_only": 0.0
+  },
+  {
+   "min_similarity": 0.25,
+   "refuse_unanswerable": 0.5,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.5,
+   "false_refusal_sim_only": 0.0
+  },
+  {
+   "min_similarity": 0.3,
+   "refuse_unanswerable": 0.75,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.75,
+   "false_refusal_sim_only": 0.0
+  },
+  {
+   "min_similarity": 0.35,
+   "refuse_unanswerable": 0.75,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.75,
+   "false_refusal_sim_only": 0.0
+  },
+  {
+   "min_similarity": 0.4,
+   "refuse_unanswerable": 0.75,
+   "false_refusal": 0.0,
+   "refuse_unanswerable_sim_only": 0.75,
+   "false_refusal_sim_only": 0.0
+  }
+ ],
+ "seconds": 5
+}
