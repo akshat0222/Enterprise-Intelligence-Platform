@@ -1,13 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { DragEvent, useCallback, useEffect, useRef, useState } from "react";
-import { api, ApiError, Doc, logout, refreshSession } from "@/lib/api";
+import { api, ApiError, Doc } from "@/lib/api";
 
 const POLL_MS = 2000;
 
 export default function DocumentsPage() {
-  const router = useRouter();
   const [docs, setDocs] = useState<Doc[] | null>(null);
   const [toasts, setToasts] = useState<string[]>([]);
   const [error, setError] = useState("");
@@ -24,8 +23,8 @@ export default function DocumentsPage() {
   }, []);
 
   useEffect(() => {
-    refreshSession().then((ok) => (ok ? load() : router.replace("/login")));
-  }, [load, router]);
+    load();
+  }, [load]);
 
   const active = docs?.some((d) => d.status === "uploaded" || d.status === "processing");
   useEffect(() => {
@@ -67,9 +66,6 @@ export default function DocumentsPage() {
     <main>
       <div className="row">
         <h1>Documents</h1>
-        <button className="secondary" onClick={async () => { await logout(); router.push("/login"); }}>
-          Sign out
-        </button>
       </div>
 
       <div
@@ -103,7 +99,7 @@ export default function DocumentsPage() {
             <tbody>
               {docs.map((d) => (
                 <tr key={d.id}>
-                  <td>{d.filename}</td>
+                  <td><Link href={`/documents/${d.id}`}>{d.filename}</Link></td>
                   <td>{d.file_type}</td>
                   <td>{d.size_bytes ? `${(d.size_bytes / 1024).toFixed(1)} KB` : "–"}</td>
                   <td>

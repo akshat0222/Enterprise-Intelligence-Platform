@@ -18,7 +18,7 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
     setError("");
     try {
       await authenticate(mode, email, password);
-      router.push("/documents");
+      router.push("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {

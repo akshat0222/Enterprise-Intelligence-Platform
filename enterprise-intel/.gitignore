@@ -6,3 +6,5 @@ __pycache__/
 node_modules/
 .next/
 *.log
+.next-build/
+tsconfig.tsbuildinfo
