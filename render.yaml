@@ -1,0 +1,39 @@
+# Render Blueprint: backend web service from the Dockerfile. Frontend goes on Vercel, database on Supabase or Neon.
+# See enterprise-intel/docs/deployment.md.
+services:
+  - type: web
+    name: eip-backend
+    runtime: docker
+    rootDir: enterprise-intel/backend
+    dockerfilePath: ./Dockerfile
+    plan: starter            # the local embedding + reranker models need ~1 GB RAM; the free 512 MB tier is too small
+    healthCheckPath: /health
+    disk:
+      name: uploads
+      mountPath: /data/uploads
+      sizeGB: 1
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DATABASE_URL        # Supabase/Neon connection string (postgresql://... is fine)
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS        # the exact Vercel URL, e.g. https://your-app.vercel.app
+        sync: false
+      - key: UPLOAD_DIR
+        value: /data/uploads
+      - key: EMBEDDING_PROVIDER
+        value: local
+      - key: MIN_SIMILARITY
+        value: "0.4"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: LANGFUSE_PUBLIC_KEY
+        sync: false
+      - key: LANGFUSE_SECRET_KEY
+        sync: false
+      - key: LANGFUSE_HOST
+        value: https://cloud.langfuse.com
