@@ -9,7 +9,7 @@ import httpx
 
 from app.config import settings
 
-DIMENSIONS = 1536  # must match chunks.embedding vector(1536)
+DIMENSIONS = 384  # must match chunks.embedding vector(384)
 BATCH_SIZE = 64
 
 
@@ -28,7 +28,7 @@ class HashingEmbedder:
     Use the OpenAI embedder for production quality.
     """
 
-    model = "hashing-1536"
+    model = "hashing-384"
 
     def _embed(self, text: str) -> list[float]:
         words = re.findall(r"\w+", text.lower())
@@ -47,7 +47,8 @@ class HashingEmbedder:
 
 
 class OpenAIEmbedder:
-    model = "text-embedding-3-small"
+    model = "text-embedding-3-small-384"  # text-embedding-3-small, shortened to 384 dims
+    api_model = "text-embedding-3-small"
 
     def __init__(self, api_key: str):
         self._client = httpx.Client(
@@ -56,7 +57,8 @@ class OpenAIEmbedder:
 
     def _request(self, inputs: list[str]) -> list[list[float]]:
         for attempt in range(4):
-            resp = self._client.post("/embeddings", json={"model": self.model, "input": inputs})
+            payload = {"model": self.api_model, "input": inputs, "dimensions": DIMENSIONS}
+            resp = self._client.post("/embeddings", json=payload)
             if resp.status_code in (429, 500, 502, 503, 504) and attempt < 3:
                 time.sleep(min(float(resp.headers.get("retry-after", 2**attempt)), 20))
                 continue
@@ -74,13 +76,32 @@ class OpenAIEmbedder:
         return self._request([text])[0]
 
 
+class LocalEmbedder:
+    """all-MiniLM-L6-v2 via ONNX (fastembed): free, offline, no API key. 384 dimensions."""
+
+    model = "all-MiniLM-L6-v2"
+
+    def __init__(self):
+        from fastembed import TextEmbedding
+
+        self._model = TextEmbedding("sentence-transformers/all-MiniLM-L6-v2")
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return [v.tolist() for v in self._model.embed(texts, batch_size=BATCH_SIZE)]
+
+    def embed_query(self, text: str) -> list[float]:
+        return self.embed_documents([text])[0]
+
+
 @lru_cache
 def get_embedder() -> Embedder:
     if settings.embedding_provider == "openai":
         if not settings.openai_api_key:
             raise RuntimeError("EMBEDDING_PROVIDER=openai requires OPENAI_API_KEY")
         return OpenAIEmbedder(settings.openai_api_key)
-    return HashingEmbedder()
+    if settings.embedding_provider == "hash":
+        return HashingEmbedder()
+    return LocalEmbedder()
 
 
 def contextual_text(title: str, heading_path: list[str] | None, content: str) -> str:

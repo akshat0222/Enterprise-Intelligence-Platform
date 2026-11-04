@@ -127,3 +127,12 @@ def test_validator_rejects_wrong_content_and_types():
 def test_filename_sanitised():
     assert sanitize_filename("../../etc/passwd") == "passwd"
     assert sanitize_filename("C:\\temp\\evil\x00.txt") == "evil.txt"
+
+
+def test_list_items_stay_separate_paragraphs():
+    from app.ingestion.structure import merge_lines
+
+    lines = [Block("line", x, page=1) for x in ("Actions", "- Add alerts.", "- Automate expansion", "on all volumes.")]
+    merged = merge_lines(lines)
+    # each item starts a paragraph; a wrapped continuation line stays with its item
+    assert [b.text for b in merged] == ["Actions", "- Add alerts.", "- Automate expansion on all volumes."]

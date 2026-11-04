@@ -31,12 +31,12 @@ def search(client, headers, query, **extra):
 def test_hashing_embedder_is_deterministic_and_normalised():
     e = HashingEmbedder()
     a, b = e.embed_query("database outage"), e.embed_query("database outage")
-    assert a == b and len(a) == 1536
+    assert a == b and len(a) == 384
     assert abs(sum(x * x for x in a) - 1) < 1e-6
 
 
 def test_keyword_query_ors_distinct_words():
-    assert keyword_query("What about ERR-4471, the error?") == "what | about | err | 4471 | the | error"
+    assert keyword_query("What about ERR-4471, the error?") == "err | 4471 | error"
 
 
 def test_search_finds_relevant_chunk_and_stores_embeddings(client, alice):
@@ -46,7 +46,8 @@ def test_search_finds_relevant_chunk_and_stores_embeddings(client, alice):
 
     upload(client, alice, "incidents.md", INCIDENTS)
     with engine.connect() as conn:
-        assert conn.scalar(text("SELECT count(*) FROM chunks WHERE embedding IS NOT NULL AND embedding_model IS NOT NULL")) > 0
+        embedded = text("SELECT count(*) FROM chunks WHERE embedding IS NOT NULL AND embedding_model IS NOT NULL")
+        assert conn.scalar(embedded) > 0
     out = search(client, alice, "why did the database fail")
     assert out["insufficient_evidence"] is False
     assert "disk space" in out["hits"][0]["content"]
@@ -88,3 +89,16 @@ def test_conflicting_documents_both_surface(client, alice):
 def test_search_requires_auth_and_validates(client, alice):
     assert client.post("/search", json={"query": "abc"}).status_code == 401
     assert client.post("/search", headers=alice, json={"query": "a"}).status_code == 422
+
+
+def test_local_model_is_semantic_and_384d():
+    from app.retrieval.embedder import LocalEmbedder
+
+    q, near, far = LocalEmbedder().embed_documents(
+        ["the server ran out of disk space", "storage volume was full", "vegetarian catering menu"]
+    )
+
+    def dot(a, b):
+        return sum(x * y for x, y in zip(a, b, strict=True))
+
+    assert len(q) == 384 and dot(q, near) > dot(q, far) + 0.2

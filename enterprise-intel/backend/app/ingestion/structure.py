@@ -7,6 +7,7 @@ from app.ingestion.blocks import Block
 MAX_HEADING_WORDS = 12
 NUMBERED = re.compile(r"^(?:chapter\s+\d+\b|(\d+(?:\.\d+)*)[.)]?\s+\S)", re.IGNORECASE)
 UNDERLINE = re.compile(r"^(=|-){3,}$")
+LIST_ITEM = re.compile(r"^([-•*]|\d+[.)])\s+\S")
 
 
 @dataclass
@@ -109,8 +110,8 @@ def merge_lines(blocks: list[Block]) -> list[Block]:
 
     for b in blocks:
         if b.type == "line":
-            if buf and buf[-1].page != b.page:
-                flush()
+            if buf and (buf[-1].page != b.page or LIST_ITEM.match(b.text)):
+                flush()  # a new page or a new list item starts a new paragraph
             buf.append(b)
         else:
             flush()
