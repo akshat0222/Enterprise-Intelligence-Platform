@@ -5,11 +5,12 @@ from app.ingestion.chunker import ChunkDraft
 from app.ingestion.tokens import count_tokens
 
 STOPWORDS = set(
-    """about above after again against also because been before being below between both could did does doing down during
-each from further had has have having here hers herself himself into itself just more most myself once only other ours
-ourselves over own same should some such than that their theirs them themselves then there these they this those through
-under until very was were what when where which while who whom will with would your yours yourself yourselves the and for
-are but not you all any can her him his its our out she too off how why""".split()
+    """about above after again against also because been before being below between both could did does
+doing down during each from further had has have having here hers herself himself into itself just
+more most myself once only other ours ourselves over own same should some such than that their
+theirs them themselves then there these they this those through under until very was were what when
+where which while who whom will with would your yours yourself yourselves the and for are but not
+you all any can her him his its our out she too off how why""".split()
 )
 
 

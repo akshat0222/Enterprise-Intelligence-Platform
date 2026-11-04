@@ -41,7 +41,7 @@ def table_to_chunks(raw_rows: list[list[object]], heading: str) -> list[tuple[st
     prefix = f"{heading}\n\n" if heading else ""
 
     def build(part: list[list[str]]) -> tuple[str, dict]:
-        meta = {"columns": header, "rows": [dict(zip(header, r)) for r in part]}
+        meta = {"columns": header, "rows": [dict(zip(header, r, strict=False)) for r in part]}
         return prefix + to_markdown(header, part), meta
 
     whole = build(body)

@@ -13,5 +13,5 @@ def extract(path: str, file_type: str) -> ExtractResult:
     try:
         extractor = EXTRACTORS[file_type]
     except KeyError:
-        raise IngestionError(f"Unsupported file type: {file_type}")
+        raise IngestionError(f"Unsupported file type: {file_type}") from None
     return extractor(path)

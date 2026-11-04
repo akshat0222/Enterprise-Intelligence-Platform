@@ -7,10 +7,10 @@ from sqlalchemy import (
     BigInteger,
     Boolean,
     DateTime,
+    Float,
     ForeignKey,
     Integer,
     Numeric,
-    Float,
     Text,
     UniqueConstraint,
     func,
@@ -118,7 +118,9 @@ class AgentStep(Base):
     __tablename__ = "agent_steps"
 
     id: Mapped[uuid.UUID] = uuid_pk()
-    message_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), ForeignKey("messages.id", ondelete="CASCADE"))
+    message_id: Mapped[uuid.UUID | None] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("messages.id", ondelete="CASCADE")
+    )
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True))
     step_no: Mapped[int | None] = mapped_column(Integer)
     tool_name: Mapped[str | None] = mapped_column(Text)

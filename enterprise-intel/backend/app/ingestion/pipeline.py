@@ -15,6 +15,7 @@ from app.ingestion.stats import compute_stats
 from app.ingestion.structure import build_sections
 from app.logging_utils import log_activity
 from app.rag.injection import looks_like_injection
+from app.retrieval.embedder import contextual_text, get_embedder
 
 
 def absolute_path(storage_path: str) -> str:
@@ -49,6 +50,10 @@ def process_document(document_id: uuid.UUID, job_id: str | None = None) -> None:
         doc = db.get(Document, document_id)
         try:
             chunks, stats = run_pipeline(absolute_path(doc.storage_path), doc.file_type)
+            embedder = get_embedder()
+            vectors = embedder.embed_documents(
+                [contextual_text(doc.filename, c.heading_path, c.content) for c in chunks]
+            )
             db.execute(delete(Chunk).where(Chunk.document_id == doc.id))
             db.add_all(
                 Chunk(
@@ -64,6 +69,8 @@ def process_document(document_id: uuid.UUID, job_id: str | None = None) -> None:
                     word_count=c.word_count,
                     chunk_metadata=c.metadata,
                     flagged_injection=looks_like_injection(c.content),
+                    embedding=vectors[i],
+                    embedding_model=embedder.model,
                 )
                 for i, c in enumerate(chunks)
             )
@@ -81,4 +88,6 @@ def process_document(document_id: uuid.UUID, job_id: str | None = None) -> None:
                 .values(status="failed", error_message=message[:500], processed_at=datetime.now(timezone.utc))
             )
             db.commit()
-            log_activity(db, doc.user_id, "process_document", "document", document_id, {"error": str(exc)[:500]}, "error")
+            log_activity(
+                db, doc.user_id, "process_document", "document", document_id, {"error": str(exc)[:500]}, "error"
+            )

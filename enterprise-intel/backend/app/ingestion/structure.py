@@ -64,7 +64,7 @@ def _looks_like_txt_heading(text: str, prev_blank: bool, next_blank: bool) -> in
     if letters and text.upper() == text and len(letters) >= 3:
         return 1
     m = NUMBERED.match(text)
-    if m and prev_blank:  # a numbered line inside a paragraph run is a list item, not a heading
+    if m and prev_blank and next_blank:  # numbered lines inside a run of lines are list items, not headings
         return min(1 + (m.group(1) or "").count("."), 3)
     if prev_blank and next_blank and text.istitle():
         return 2
@@ -77,7 +77,7 @@ def classify_txt_lines(blocks: list[Block]) -> list[Block]:
         if b.type != "line":
             out.append(b)
             continue
-        if UNDERLINE.match(b.text) and out and out[-1].type == "line":
+        if UNDERLINE.match(b.text) and out and out[-1].type in ("line", "heading"):
             prev = out[-1]
             prev.type, prev.level = "heading", 1 if b.text[0] == "=" else 2
             continue

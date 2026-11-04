@@ -62,7 +62,9 @@ def bob(client):
     return register(client, "bob@example.com")
 
 
-def make_pdf(heading: str = "Incident Report", body: str = "The primary database ran out of disk space on Monday.") -> bytes:
+def make_pdf(
+    heading: str = "Incident Report", body: str = "The primary database ran out of disk space on Monday."
+) -> bytes:
     doc = fitz.open()
     page = doc.new_page()
     page.insert_text((72, 100), heading, fontsize=22)

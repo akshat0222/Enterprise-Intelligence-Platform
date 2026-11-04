@@ -52,7 +52,7 @@ class ChunkOut(BaseModel):
 
 
 def get_owned_document(db: Session, user: User, document_id: uuid.UUID) -> Document:
-    """Ownership is part of the query; a document that belongs to someone else is indistinguishable from a missing one."""
+    """Ownership is part of the query, so someone else's document is indistinguishable from a missing one."""
     doc = db.scalar(select(Document).where(Document.id == document_id, Document.user_id == user.id))
     if doc is None:
         raise HTTPException(404, "Document not found")
@@ -79,7 +79,7 @@ async def upload_document(
     try:
         file_type = validate_upload(filename, data, max_bytes)
     except UploadValidationError as exc:
-        raise HTTPException(400, str(exc))
+        raise HTTPException(400, str(exc)) from None
 
     content_hash = sha256_hex(data)
 

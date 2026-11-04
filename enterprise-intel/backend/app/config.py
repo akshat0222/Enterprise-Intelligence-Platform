@@ -21,6 +21,12 @@ class Settings(BaseSettings):
     chunk_target_tokens: int = 500
     chunk_overlap_tokens: int = 60
 
+    embedding_provider: str = "hash"  # "hash" (offline, lexical) or "openai"
+    openai_api_key: str = ""
+    # Relevance gate thresholds; tune on the eval set.
+    min_similarity: float = 0.2
+    min_keyword_rank: float = 0.05
+
     @property
     def is_production(self) -> bool:
         return self.environment == "production"

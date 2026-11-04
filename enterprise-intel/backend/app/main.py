@@ -10,7 +10,7 @@ from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from sqlalchemy import text
 
-from app.api import auth, documents
+from app.api import auth, documents, search
 from app.config import settings
 from app.db.session import engine
 from app.ratelimit import limiter
@@ -81,3 +81,4 @@ def health():
 
 app.include_router(auth.router)
 app.include_router(documents.router)
+app.include_router(search.router)

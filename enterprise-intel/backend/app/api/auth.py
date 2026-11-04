@@ -75,7 +75,7 @@ def register(request: Request, body: Credentials, db: Session = Depends(get_db))
         db.commit()
     except IntegrityError:
         db.rollback()
-        raise HTTPException(409, "An account with this email already exists")
+        raise HTTPException(409, "An account with this email already exists") from None
     log_activity(db, user.id, "register", "user", user.id)
     return user
 
@@ -102,7 +102,7 @@ def refresh(request: Request, response: Response, db: Session = Depends(get_db))
     try:
         user = db.get(User, uuid.UUID(decode_token(token, "refresh")))
     except (jwt.PyJWTError, ValueError, KeyError):
-        raise HTTPException(401, "Invalid or expired refresh token")
+        raise HTTPException(401, "Invalid or expired refresh token") from None
     if user is None:
         raise HTTPException(401, "Invalid or expired refresh token")
     return _token_response(user, response)

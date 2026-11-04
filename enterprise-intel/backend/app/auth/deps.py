@@ -21,7 +21,7 @@ def get_current_user(
     try:
         user_id = uuid.UUID(decode_token(creds.credentials, "access"))
     except (jwt.PyJWTError, ValueError, KeyError):
-        raise HTTPException(401, "Invalid or expired token")
+        raise HTTPException(401, "Invalid or expired token") from None
     user = db.get(User, user_id)
     if user is None:
         raise HTTPException(401, "Invalid or expired token")

@@ -40,7 +40,7 @@ def validate_upload(filename: str, data: bytes, max_bytes: int) -> str:
         try:
             doc = fitz.open(stream=data, filetype="pdf")
         except Exception:
-            raise UploadValidationError("PDF is corrupt or unreadable")
+            raise UploadValidationError("PDF is corrupt or unreadable") from None
         if doc.needs_pass or doc.is_encrypted:
             raise UploadValidationError("Encrypted PDFs are not supported")
         if doc.page_count == 0:

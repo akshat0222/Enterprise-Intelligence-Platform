@@ -1,3 +1,5 @@
+import pytest
+
 from app.ingestion.blocks import Block
 from app.ingestion.chunker import chunk_sections, split_sentences
 from app.ingestion.pipeline import run_pipeline
@@ -7,8 +9,6 @@ from app.ingestion.tokens import count_tokens
 from app.ingestion.validators import UploadValidationError, sanitize_filename, validate_upload
 from app.rag.injection import looks_like_injection
 from tests.conftest import make_pdf
-
-import pytest
 
 
 def write(tmp_path, name: str, content: str | bytes) -> str:

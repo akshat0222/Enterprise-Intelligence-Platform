@@ -23,13 +23,13 @@ def extract(path: str) -> ExtractResult:
     try:
         df = pd.read_csv(io.StringIO(text), sep=None, engine="python", dtype_backend="numpy_nullable")
     except Exception as exc:
-        raise IngestionError(f"Could not parse CSV: {exc}")
+        raise IngestionError(f"Could not parse CSV: {exc}") from exc
     if df.empty:
         raise IngestionError("CSV has no data rows")
 
     df.columns = [str(c).strip() for c in df.columns]
     blocks = [Block("csv_schema", _schema_text(df), meta={"columns": list(df.columns), "rows": len(df)})]
     for n, row in enumerate(df.itertuples(index=False), start=1):
-        body = "\n".join(f"{col}: {val}" for col, val in zip(df.columns, row) if not pd.isna(val))
+        body = "\n".join(f"{col}: {val}" for col, val in zip(df.columns, row, strict=False) if not pd.isna(val))
         blocks.append(Block("csv_row", f"Row {n}\n{body}", meta={"row": n}))
     return ExtractResult(blocks=blocks, pages=1)
