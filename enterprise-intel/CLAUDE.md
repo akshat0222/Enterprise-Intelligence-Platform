@@ -26,7 +26,7 @@ Multi-user RAG + LangGraph agent platform.
 - `chat/service.py` runs one turn; `api/conversations.py` streams it as SSE
 - Frontend (`frontend/`): `app/(app)/*` pages behind `components/AppShell.tsx` (client-side auth guard); `lib/api.ts` has the API client, types and the SSE reader (`streamChat`). Production build check: `docker compose exec -e NEXT_DIST_DIR=.next-build frontend npx next build`
 - `backend/eval/`: corpus generator, `dataset.jsonl`, `run.py` (retrieval + end-to-end), `report.py` → `report.md`. Judge model must differ from the answerer's family; `run.py` refuses to fall back.
-- CI: `.github/workflows/ci.yml` (repo root). The project runs locally with Docker only (see `docs/deployment.md`).
+- CI: `.github/workflows/ci.yml` (repo root). The project runs locally with Docker only (see `mdfile/deployment.md`).
 
 ## Gotchas
 - Gemini's free tier has a small daily quota per model; the eval judge defaults to `gemini-3-flash-preview` (`EVAL_JUDGE_MODEL`).

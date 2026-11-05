@@ -47,8 +47,8 @@ docker compose run --rm backend pytest -q
 - **Deterministic ingestion:** no LLM calls until the embedding step.
 
 ## Documentation
-- [Architecture and design decisions](docs/architecture.md) · [Database schema](docs/schema.md) · [Running locally](docs/deployment.md) · [User guide](docs/user_guide.md) · [How it works](docs/word/How_It_Works.docx) · [Limitations](docs/word/Limitations.docx) · [Sample document and test questions](docs/sample/test_questions.txt)
-- [Evaluation report](backend/eval/report.md) · [Development report (draft)](docs/development_report.md) · [CLAUDE.md](CLAUDE.md)
+- [Architecture and design decisions](mdfile/architecture.md) · [Database schema](mdfile/schema.md) · [Running locally](mdfile/deployment.md) · [User guide](mdfile/user_guide.md)
+- [Evaluation report](backend/eval/report.md) · [Development report (draft)](mdfile/development_report.md) · [CLAUDE.md](CLAUDE.md)
 
 ## Retrieval strategy (why hybrid)
 Enterprise documents mix natural language, where semantic search wins, with exact identifiers such as error codes, ticket
