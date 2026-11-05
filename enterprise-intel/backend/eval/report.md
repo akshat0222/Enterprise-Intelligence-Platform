@@ -143,6 +143,13 @@ the documents' vocabulary ("actions"), so the missing chunks never reach the can
 wider `top_k` did not fix it. The plan's remedy, multi-query expansion (several rewrites of the query merged by RRF), is not
 implemented; per-document retrieval for "across all documents" questions would also help.
 
+**A gap the dataset did not catch (found by manual testing).** Asking "what is database failover" against the runbook was
+refused as "not found" although the section is titled DATABASE FAILOVER. The embedding already included the heading, but the
+keyword index covered only the body, which never uses those words, and a short definitional query scores low on MiniLM
+similarity alone. The keyword index now includes the heading, weighted above the body (migration 0004), with a regression test.
+The retrieval numbers above are unchanged by the fix (re-run: Hit@1 0.92, Hit@3 1.00, MRR 0.94); the end-to-end run was not
+repeated. The dataset has no question that uses only a section title, so it could not have shown this.
+
 **Cost and latency** (estimated prices): p50 6.1 s and p95 22.7 s per question (the agent path is the slow one, about 24 s),
 about 6.8k tokens and $0.02 per question on average, no provider fallbacks.
 

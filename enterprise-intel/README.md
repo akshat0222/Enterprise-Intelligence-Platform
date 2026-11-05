@@ -38,7 +38,8 @@ docker compose run --rm backend pytest -q
 | Frontend: app shell + auth guard, dashboard (KPIs, usage chart, providers, activity), document detail (outline, keywords, chunk browser), chat (streaming, sources / agent trace / details panels, conflict + not-found cards, document scope + model picker), logs | done |
 | Evaluation: 10-document corpus, 28 questions, retrieval experiments, end-to-end run (`backend/eval/`, results in `backend/eval/report.md`) | done |
 | Optional local cross-encoder reranker (`RERANK_ENABLED`), off by default (no measurable gain on the eval set) | done |
-| GitHub Actions CI (lint, tests, frontend type-check and build) and Render blueprint | written, not yet run on GitHub / not deployed |
+| GitHub Actions CI (lint, tests, frontend type-check and build) | written and pushed |
+| Cloud deployment | **not done by decision: the project runs locally with Docker** |
 
 ## Design notes
 - **Tenant isolation:** every query filters by `user_id` in SQL; foreign IDs return 404.
@@ -46,7 +47,7 @@ docker compose run --rm backend pytest -q
 - **Deterministic ingestion:** no LLM calls until the embedding step.
 
 ## Documentation
-- [Architecture and design decisions](docs/architecture.md) · [Database schema](docs/schema.md) · [Deployment](docs/deployment.md)
+- [Architecture and design decisions](docs/architecture.md) · [Database schema](docs/schema.md) · [Running locally](docs/deployment.md) · [User guide](docs/user_guide.md) · [How it works](docs/word/How_It_Works.docx) · [Limitations](docs/word/Limitations.docx) · [Sample document and test questions](docs/sample/test_questions.txt)
 - [Evaluation report](backend/eval/report.md) · [Development report (draft)](docs/development_report.md) · [CLAUDE.md](CLAUDE.md)
 
 ## Retrieval strategy (why hybrid)

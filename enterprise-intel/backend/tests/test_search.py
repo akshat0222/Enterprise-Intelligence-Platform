@@ -54,6 +54,28 @@ def test_search_finds_relevant_chunk_and_stores_embeddings(client, alice):
     assert out["hits"][0]["filename"] == "incidents.md"
 
 
+RUNBOOK = b"""OPERATIONS RUNBOOK
+==================
+
+1. DATABASE FAILOVER
+
+Check the replication lag before promoting the replica. Promote it only if lag is under 10 seconds.
+
+2. BACKUPS
+
+Full backups run nightly at 02:00 UTC and are kept for 30 days.
+"""
+
+
+def test_section_heading_is_keyword_searchable(client, alice):
+    """The heading words are not in the chunk body, yet a question using them must still find the section."""
+    upload(client, alice, "runbook.txt", RUNBOOK)
+    out = search(client, alice, "DATABASE FAILOVER")
+    assert out["insufficient_evidence"] is False
+    top = out["hits"][0]
+    assert "replication lag" in top["content"] and top["keyword_rank"] is not None
+
+
 def test_exact_identifier_is_found_by_keyword_search(client, alice):
     upload(client, alice, "incidents.md", INCIDENTS)
     top = search(client, alice, "ERR-4471")["hits"][0]

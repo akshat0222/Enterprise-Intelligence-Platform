@@ -16,7 +16,7 @@
 
 Almost all implementation: FastAPI backend, Alembic migrations, ingestion pipeline, hybrid retrieval, LLM gateway, RAG answering and
 verifier, memory, the LangGraph agent, the Next.js frontend, the test suite (75+ tests with fake LLM providers), the evaluation
-corpus/dataset/runner, CI and deployment config.
+corpus/dataset/runner, CI and Docker setup.
 
 ## What I decided  *(author to confirm)*
 
@@ -45,6 +45,7 @@ Each was found by running something (tests, a live call, the browser), not by re
 | 12 | The evaluation judge silently fell back to the answerer's own model family when Gemini's free tier rate-limited | Run logs showed circuit-breaker messages; 16 of 28 judgements were by Haiku | Judge gateway can only reach Gemini models, paces calls and caches judgements; Gemini's free daily quota still ran out, so an explicit opt-in flag labels the remaining 10 as same-family (re-run later to upgrade them) |
 | 13 | Relevance gate default (0.2) let most unanswerable questions through the retrieval stage | Evaluation threshold sweep | Raised to 0.4 (tuned on the same set; see limitations) |
 | 14 | A cross-document synthesis question missed two of three reports with a single `top_k=10` search | Evaluation: partial score; the agent step log showed the passages | Planner guidance for wider `top_k` did **not** fix it. Root cause is vocabulary mismatch ("fixes" vs "actions"); multi-query expansion would, but is not implemented. Documented in the report |
+| 15 | "What is database failover?" was refused as not found although the runbook has a section with that title | Manual test in the chat UI; the 28-question dataset had no heading-only question | Keyword index now includes the heading path, weighted above the body (migration 0004); regression test added |
 
 ## How it was validated
 
